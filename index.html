@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Management System</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #0ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #app {
+      background: #111;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #0ff;
+      width: 90%;
+      max-width: 600px;
+      animation: glowFade 2s infinite alternate;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: #222;
+      color: #0ff;
+      box-shadow: 0 0 5px #0ff;
+      outline: none;
+      transition: 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    button {
+      cursor: pointer;
+      background: #0ff;
+      color: #000;
+      font-weight: bold;
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    button:hover {
+      background: #000;
+      color: #0ff;
+      box-shadow: 0 0 15px #0ff;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background: #222;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 0 5px #0ff;
+      transition: transform 0.2s ease;
+    }
+
+    li:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 12px #0ff;
+    }
+
+    @keyframes glowFade {
+      from {
+        box-shadow: 0 0 15px #0ff;
+      }
+      to {
+        box-shadow: 0 0 25px #0ff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Employee Management System</h1>
+    
+    <div id="login-section">
+      <input type="text" id="username" placeholder="Enter Your Name" />
+      <select id="role">
+        <option value="admin">Admin</option>
+        <option value="employee">Employee</option>
+      </select>
+      <button onclick="login()">Login</button>
+    </div>
+
+    <div id="admin-dashboard" class="hidden">
+      <h2>Admin Dashboard</h2>
+      <button onclick="toggleForm()">+ Add Employee</button>
+      <div id="add-employee-form" class="hidden">
+        <input type="text" id="emp-name" placeholder="Employee Name" />
+        <input type="text" id="emp-role" placeholder="Employee Role" />
+        <button onclick="addEmployee()">Submit</button>
+      </div>
+      <ul id="employee-list"></ul>
+    </div>
+
+    <div id="employee-dashboard" class="hidden">
+      <h2>Employee Profile</h2>
+      <p><strong>Name:</strong> <span id="empProfileName"></span></p>
+      <p><strong>Role:</strong> Employee</p>
+    </div>
+  </div>
+
+  <script>
+    let employees = [];
+
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const role = document.getElementById('role').value;
+
+      if (!username) {
+        alert('Please enter a username.');
+        return;
+      }
+
+      document.getElementById('login-section').classList.add('hidden');
+
+      if (role === 'admin') {
+        document.getElementById('admin-dashboard').classList.remove('hidden');
+      } else {
+        document.getElementById('employee-dashboard').classList.remove('hidden');
+        document.getElementById('empProfileName').innerText = username;
+      }
+    }
+
+    function toggleForm() {
+      document.getElementById('add-employee-form').classList.toggle('hidden');
+    }
+
+    function addEmployee() {
+      const name = document.getElementById('emp-name').value.trim();
+      const role = document.getElementById('emp-role').value.trim();
+
+      if (!name || !role) {
+        alert('Please fill all employee details.');
+        return;
+      }
+
+      employees.push({ name, role });
+      updateEmployeeList();
+
+      document.getElementById('emp-name').value = '';
+      document.getElementById('emp-role').value = '';
+      document.getElementById('add-employee-form').classList.add('hidden');
+    }
+
+    function updateEmployeeList() {
+      const list = document.getElementById('employee-list');
+      list.innerHTML = '';
+      employees.forEach(emp => {
+        const li = document.createElement('li');
+        li.textContent = `${emp.name} - ${emp.role}`;
+        list.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
