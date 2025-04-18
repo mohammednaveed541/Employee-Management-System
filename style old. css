@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #0ff;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  height: 100vh;
+  padding-top: 30px;
+}
+
+#app {
+  background: #111;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #0ff;
+  width: 95%;
+  max-width: 600px;
+  animation: glowFade 2s infinite alternate;
+}
+
+h1, h2, h3 {
+  text-align: center;
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  background: #222;
+  color: #0ff;
+  box-shadow: 0 0 5px #0ff;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+button {
+  cursor: pointer;
+  background: #0ff;
+  color: #000;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #000;
+  color: #0ff;
+  box-shadow: 0 0 10px #0ff;
+}
+
+.hidden {
+  display: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #222;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 0 5px #0ff;
+}
+
+.emp-actions {
+  margin-top: 5px;
+}
+
+.emp-actions button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
+@keyframes glowFade {
+  from {
+    box-shadow: 0 0 15px #0ff;
+  }
+  to {
+    box-shadow: 0 0 25px #0ff;
+  }
+}
